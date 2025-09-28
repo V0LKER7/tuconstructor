@@ -7,8 +7,16 @@ class Constructor():
 	def __init__(self, functions: list, power: int):
 		self.alpha = self.alpha[:power]
 		self.code = "00, ,=,1"
+		c=0
 		for x in functions:
-			self.code += x.build(self.alpha)
+			c+=1
+			if c == 1:
+				self.code += x.build(1,self.alpha)
+				self.endState = x.endState()
+			else:
+				self.code += x.build(self.endState,self.alpha)
+				self.endState = x.endState()
+		self.code += f"\n{self.endState}, , ,{self.endState}"
 
 	def build(self, name):
 		if os.path.exists(name):

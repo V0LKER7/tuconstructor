@@ -1,11 +1,9 @@
 class Function():
-    def __init__(self, startState, rank):
-        self.startState = startState
+    def __init__(self, rank):
         self.idx = 0
         self.uses = 1
         self.rank = rank
         self.states = [0 for i in range(rank)]
-        self.states[1] = startState
         self.currState = f"!{"".join(map(str, self.states))}"
         self.tuCode = ''
 
@@ -30,6 +28,12 @@ class Function():
         for x in condition:
             self.tuCode += f"\n{start},{x},{"<>"[action] if action in [0, 1, -1] else "<>=#"[action] if action in [2, 3] else action},{end}"
 
-    def build(self, alphabet: str) -> str:
+    def buildInit(self, startState):
+        self.startState = startState
+        self.states[1] = startState
+        self.currState = f"!{"".join(map(str, self.states))}"
+
+    def build(self, alphabet: str, startState: int) -> str:
+        self.buildInit(startState)
         self.alphabet = alphabet
         return self.tuCode

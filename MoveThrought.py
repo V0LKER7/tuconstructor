@@ -2,9 +2,10 @@ from Function import Function
 
 class MoveThrought(Function):
 
-    def __init__(self, startState, elements, direction: int, rank=4):
-        super().__init__(startState, rank)
+    def __init__(self, elements, direction: int, rank=4, comfort=1):
+        super().__init__(rank)
         self.elements = elements
+        self.comfort = comfort
         self.direction = direction
 
     direc = "<>"
@@ -20,8 +21,14 @@ class MoveThrought(Function):
     
     def code(self, condition: str, action, change=None, startState=None, endState=None):
         return super().code(condition, action, change, startState, endState)
+    
+    def buildInit(self, startState):
+        return super().buildInit(startState)
 
-    def build(self, alphabet):
+    def build(self, startState, alphabet):
+        self.buildInit(startState)
+        self.startState = startState
+        self.states[1] = startState
         self.code(" ",self.direction,1,self.startState)
         self.code(" ",self.direction)
         self.code(alphabet,2,1)
