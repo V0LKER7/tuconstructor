@@ -9,7 +9,9 @@ class Function():
         self.currState = f"!{"".join(map(str, self.states))}"
         self.tuCode = ''
 
-    def endState(self) -> int:
+    def endState(self, change=None) -> int:
+        if change:
+            self.uses += change
         return self.states[1] + self.uses
     
     def changeState(self, rank, change=None) -> str:
@@ -22,14 +24,11 @@ class Function():
         self.startOfCycle = self.changeState(rank)
         self.endOfCycle = self.changeState(rank, change)
     
-    def code(self, condition: str, action: int, change=None, startState=None, endState=None):
+    def code(self, condition: str, action, change=None, startState=None, endState=None):
         start = startState if startState else self.currState
         end = endState if endState else self.changeState(0,change)
-        c=0
         for x in condition:
-            c += 1
-            self.tuCode += f"\n{start},{x},{"<>=#"[action]},{end}"
-        print(c, start)
+            self.tuCode += f"\n{start},{x},{"<>"[action] if action in [0, 1, -1] else "<>=#"[action] if action in [2, 3] else action},{end}"
 
     def build(self, alphabet: str) -> str:
         self.alphabet = alphabet

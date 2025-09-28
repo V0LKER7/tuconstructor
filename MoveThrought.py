@@ -12,13 +12,13 @@ class MoveThrought(Function):
     def changeState(self, rank, change=None) -> str:
         return super().changeState(rank, change)
 
-    def endState(self) -> int:
-        return super().endState()
+    def endState(self, change=None) -> int:
+        return super().endState(change)
     
     def startCycle(self, change, rank=2):
         return super().startCycle(change, rank)
     
-    def code(self, condition: str, action: int, change=None, startState=None, endState=None):
+    def code(self, condition: str, action, change=None, startState=None, endState=None):
         return super().code(condition, action, change, startState, endState)
 
     def build(self, alphabet):
