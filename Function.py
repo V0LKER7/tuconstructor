@@ -1,5 +1,5 @@
 class Function():
-    def __init__(self, rank):
+    def __init__(self, rank=4):
         self.idx = 0
         self.uses = 1
         self.rank = rank

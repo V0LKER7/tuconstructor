@@ -21,20 +21,32 @@ class CopyThrought(Function):
     def buildInit(self, startState):
         return super().buildInit(startState)
     
-    def build(self, startState, alphabet: str) -> str:
+    def build(self, alphabet: str, startState) -> str:
         self.buildInit(startState)
-        self.startState = startState
-        self.states[1] = startState
-        self.code(" ",self.directionFrom,0,self.startState,self.startState)
-        # print(self.startState)
-        self.code(alphabet,self.directionFrom-1,1,self.startState)
-        self.code(" ",self.directionFrom,1,endState=self.endState())
-        copy = CopySymbol(self.elements,self.directionTo)
-        self.tuCode += copy.build(self.endState(), alphabet)
-        self.uses += copy.uses
-        self.endState(1)
-        self.code(alphabet,self.directionFrom,1,startState=copy.endState())
-        self.code(alphabet,2,0,endState=copy.startState)
-        self.code(" ",2,endState=self.endState())
-        # print(self.endState())
+        if self.directionFrom == 1:
+            self.code(" ",self.directionFrom,0,self.startState,self.startState)
+            self.code(alphabet,self.directionFrom-1,1,self.startState)
+            self.code(" ",self.directionFrom,1,endState=self.endState())
+            copy = CopySymbol(self.elements,self.directionTo)
+            self.tuCode += copy.build(alphabet, self.endState())
+            self.uses += copy.uses
+            self.endState(1)
+            self.code(alphabet,self.directionFrom,1,startState=copy.endState())
+            self.code(alphabet,2,0,endState=copy.startState)
+            self.code(" ",2,endState=self.endState())
+        else:
+            self.code(" ",self.directionFrom,1,self.startState)
+            self.code(alphabet,self.directionFrom)
+            self.code(" ",self.directionFrom-1,1)
+
+            self.code(" ",self.directionFrom-1,0)
+            self.code(alphabet,self.directionFrom,1)
+            self.code(" ",self.directionFrom-1,1,endState=self.endState())
+            copy = CopySymbol(self.elements,self.directionTo)
+            self.tuCode += copy.build(alphabet, self.endState())
+            self.uses += copy.uses
+            self.endState(1)
+            self.code(alphabet,self.directionFrom-1,1,startState=copy.endState())
+            self.code(alphabet,2,0,endState=copy.startState)
+            self.code(" ",2,endState=self.endState())
         return self.tuCode

@@ -11,10 +11,10 @@ class Constructor():
 		for x in functions:
 			c+=1
 			if c == 1:
-				self.code += x.build(1,self.alpha)
+				self.code += x.build(str(self.alpha),1)
 				self.endState = x.endState()
 			else:
-				self.code += x.build(self.endState,self.alpha)
+				self.code += x.build(str(self.alpha),self.endState)
 				self.endState = x.endState()
 		self.code += f"\n{self.endState}, , ,{self.endState}"
 

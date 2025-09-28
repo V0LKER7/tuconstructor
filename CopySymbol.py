@@ -22,7 +22,7 @@ class CopySymbol(Function):
 	def buildInit(self, startState):
 		return super().buildInit(startState)
 	
-	def build(self, startState, alphabet):
+	def build(self, alphabet, startState):
 		self.buildInit(startState)
 		self.startCycle(1)
 		self.code(alphabet,2,0,self.startState,self.startOfCycle)

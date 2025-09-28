@@ -187,7 +187,7 @@ class Constructor():
         self.answer()
         if os.path.exists(name):
             os.remove("./" + name)
-        file = open(name, "w+")
+        file = open(name, "w+", encoding='utf-8')
         file.write(self.code)
         file.close
 
