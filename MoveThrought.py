@@ -2,8 +2,8 @@ from Function import Function
 
 class MoveThrought(Function):
 
-    def __init__(self, elements, direction: int, rank=4):
-        super().__init__(rank)
+    def __init__(self, elements, direction: int, rank=4, specSymbol="$"):
+        super().__init__(rank, specSymbol)
         self.elements = elements
         self.direction = direction
 

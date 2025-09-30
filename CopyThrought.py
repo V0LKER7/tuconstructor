@@ -3,8 +3,8 @@ from Function import Function
 from MoveThrought import MoveThrought
 
 class CopyThrought(Function):
-    def __init__(self, elements, directionFrom, directionTo, rank=4):
-        super().__init__(rank) 
+    def __init__(self, elements, directionFrom, directionTo, rank=4, specSymbol="$"):
+        super().__init__(rank, specSymbol) 
         self.elements = elements
         self.directionFrom = directionFrom
         self.directionTo = directionTo

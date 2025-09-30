@@ -2,8 +2,8 @@ from Function import Function
 from MoveThrought import MoveThrought
 
 class CopySymbol(Function):
-	def __init__(self, elements, direction: int, rank=4):
-		super().__init__(rank)
+	def __init__(self, elements, direction: int, rank=4, specSymbol="$"):
+		super().__init__(rank, specSymbol)
 		self.elements = elements
 		self.direction = direction
 				
@@ -28,6 +28,7 @@ class CopySymbol(Function):
 		self.code(alphabet,2,0,self.startState,self.startOfCycle)
 		for x in alphabet:
 			self.code(x," ",1,self.startOfCycle)
+			# self.code(self.specSymbol,2,self.startOfCycle,self.endState())
 			for i in range(self.elements):
 				self.code(" ",self.direction,1)
 				self.code(alphabet,self.direction)

@@ -1,12 +1,18 @@
 from Constructor import Constructor
 from CopySymbol import CopySymbol
+from CopyThroughtBeforeRight import CopyThroughtBeforeRight
 from MoveThrought import MoveThrought
 from CopyThrought import CopyThrought
 from SliceNumber import SliceNumber
+from DeleteWordBeforeSymbol import DeleteWordBeforeSymbol
+from Subtraction import Subtraction
 
-left = MoveThrought(1, 0)
-copy = CopyThrought(1,0,0)
+left = MoveThrought(2, 0)
+copy = CopyThrought(2,1,1)
 right = MoveThrought(2, 1)
+copy1 = CopyThroughtBeforeRight(1)
 slicen = SliceNumber(1,1,1)
-constr = Constructor([copy], 10)
+sub = Subtraction()
+delete = DeleteWordBeforeSymbol()
+constr = Constructor([sub], 10)
 constr.build("test.tu4")

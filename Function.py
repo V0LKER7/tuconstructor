@@ -1,8 +1,9 @@
 class Function():
-    def __init__(self, rank=4):
+    def __init__(self, rank=4, specSymbol="$"):
         self.idx = 0
         self.uses = 1
         self.rank = rank
+        self.specSymbol=specSymbol
         self.states = [0 for i in range(rank)]
         self.currState = f"!{"".join(map(str, self.states))}"
         self.tuCode = ''
